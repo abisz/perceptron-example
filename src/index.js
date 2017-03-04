@@ -1,5 +1,7 @@
 import Plot from './Components/Plot';
 
+// The target function as well as the point generator are only necessary for artificial scenarios
+// In a real world example you would already have the data set
 const targetValue = (Math.random() * 2) - 1;
 function targetFunction(point) {
   if (point.x1 + point.x2 > targetValue) {
@@ -25,6 +27,7 @@ for (let i = 0; i < N; i += 1) {
   data.push(generateRandomPoint());
 }
 
+// Here is where the PLA starts
 function hypothesis(point, weights) {
   if (weights[0] + (point.x1 * weights[1]) + (point.x2 * weights[2]) > 0) {
     return 1;

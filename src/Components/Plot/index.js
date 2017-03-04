@@ -30,14 +30,20 @@ class Plot {
 
   update(data) {
     // Scale Setup
+    // as long as the target function is bound to -1, 1
+    // it doesn't make sense to make the scaling dynamic
     this.xscale.domain([
-      data.map(d => d.x1).reduce((min, x) => Math.min(min, x)),
-      data.map(d => d.x1).reduce((max, x) => Math.max(max, x)),
+      // data.map(d => d.x1).reduce((min, x) => Math.min(min, x)),
+      -1,
+      // data.map(d => d.x1).reduce((max, x) => Math.max(max, x)),
+      1,
     ]);
 
     this.yscale.domain([
-      data.map(d => d.x2).reduce((min, x) => Math.min(min, x)),
-      data.map(d => d.x2).reduce((max, x) => Math.max(max, x)),
+      // data.map(d => d.x2).reduce((min, x) => Math.min(min, x)),
+      -1,
+      // data.map(d => d.x2).reduce((max, x) => Math.max(max, x)),
+      1,
     ]);
 
     // Data Points
