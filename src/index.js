@@ -1,7 +1,8 @@
 import Plot from './Components/Plot';
 
+const targetValue = (Math.random() * 2) - 1;
 function targetFunction(point) {
-  if (point.x1 + point.x2 > 0) {
+  if (point.x1 + point.x2 > targetValue) {
     return 1;
   }
   return -1;
@@ -33,8 +34,9 @@ function hypothesis(point, weights) {
 
 const plot = new Plot('#plot');
 const weights = [Math.random(), Math.random(), Math.random()];
+const delay = 500;
 
-while (data.filter(d => hypothesis(d, weights) !== d.y).length > 0) {
+function iterate() {
   const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);
 
   if (mismatches.length !== 0) {
@@ -47,5 +49,13 @@ while (data.filter(d => hypothesis(d, weights) !== d.y).length > 0) {
 
   plot.addLine(weights);
   plot.update(data);
+
+  if (data.filter(d => hypothesis(d, weights) !== d.y).length > 0) {
+    setTimeout(iterate, delay);
+  } else {
+    plot.addLine(weights, true);
+    plot.update(data);
+  }
 }
 
+iterate();

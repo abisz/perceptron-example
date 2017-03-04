@@ -53,25 +53,47 @@ class Plot {
       .attr('cy', d => this.yscale(d.x2))
       .attr('r', 5)
       .attr('fill', (d) => {
-        const color = d.y > 0 ? 'red' : 'green';
+        const color = d.y > 0 ? 'red' : 'blue';
         return color;
       });
 
+    points.exit().remove();
+
     // Lines
-    const lines = this.g.selectAll('.line')
-      .data(this.lines);
+    let lines;
+    if (this.finalLine) {
+      lines = this.g.selectAll('.line')
+        .data([this.finalLine]);
 
-    const linesEntered = lines.enter()
-      .append('line');
+      const linesEntered = lines.enter()
+        .append('line');
 
-    lines.merge(linesEntered)
-      .attr('class', 'line')
-      .attr('x1', d => this.xscale(d.a.x))
-      .attr('y1', d => this.yscale(d.a.y))
-      .attr('x2', d => this.xscale(d.b.x))
-      .attr('y2', d => this.yscale(d.b.y))
-      .attr('stroke-width', 1)
-      .attr('stroke', 'black');
+      lines.merge(linesEntered)
+        .attr('class', 'line')
+        .attr('x1', d => this.xscale(d.a.x))
+        .attr('y1', d => this.yscale(d.a.y))
+        .attr('x2', d => this.xscale(d.b.x))
+        .attr('y2', d => this.yscale(d.b.y))
+        .attr('stroke-width', 1)
+        .attr('stroke', 'green');
+    } else {
+      lines = this.g.selectAll('.line')
+        .data(this.lines);
+
+      const linesEntered = lines.enter()
+        .append('line');
+
+      lines.merge(linesEntered)
+        .attr('class', 'line')
+        .attr('x1', d => this.xscale(d.a.x))
+        .attr('y1', d => this.yscale(d.a.y))
+        .attr('x2', d => this.xscale(d.b.x))
+        .attr('y2', d => this.yscale(d.b.y))
+        .attr('stroke-width', 1)
+        .attr('stroke', 'black');
+    }
+
+    lines.exit().remove();
 
     // Axis
     this.g.append('g')
@@ -85,12 +107,13 @@ class Plot {
       .call(d3.axisLeft(this.yscale));
   }
 
-  addLine(weights) {
+  addLine(weights, final = false) {
     const k = -(weights[1] / weights[2]);
     const d = -(weights[0] / weights[2]);
     const a = { x: -1, y: d - k };
     const b = { x: 1, y: d + k };
-    this.lines.push({ a, b });
+    if (final) this.finalLine = { a, b };
+    else this.lines.push({ a, b });
   }
 }
 
