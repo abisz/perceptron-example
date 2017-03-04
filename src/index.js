@@ -1,7 +1,7 @@
 import Plot from './Components/Plot';
 
 function targetFunction(point) {
-  if (point.x1 + point.x2 > 0.5) {
+  if (point.x1 + point.x2 > 0) {
     return 1;
   }
   return -1;
@@ -25,5 +25,17 @@ for (let i = 0; i < N; i += 1) {
 }
 
 const plot = new Plot('#plot');
+
+const a = {
+  x: -1,
+  y: 0.2,
+};
+
+const b = {
+  x: 1,
+  y: 0.1,
+};
+
+plot.addLine(a, b);
 
 plot.update(data);

@@ -24,9 +24,12 @@ class Plot {
 
     this.yscale = d3.scaleLinear()
       .rangeRound([this.height, 0]);
+
+    this.lines = [];
   }
 
   update(data) {
+    // Scale Setup
     this.xscale.domain([
       data.map(d => d.x1).reduce((min, x) => Math.min(min, x)),
       data.map(d => d.x1).reduce((max, x) => Math.max(max, x)),
@@ -37,6 +40,7 @@ class Plot {
       data.map(d => d.x2).reduce((max, x) => Math.max(max, x)),
     ]);
 
+    // Data Points
     const points = this.g.selectAll('.point')
       .data(data);
 
@@ -44,6 +48,7 @@ class Plot {
       .append('circle');
 
     points.merge(pointsEntered)
+      .attr('class', 'point')
       .attr('cx', d => this.xscale(d.x1))
       .attr('cy', d => this.yscale(d.x2))
       .attr('r', 5)
@@ -51,6 +56,22 @@ class Plot {
         const color = d.y > 0 ? 'red' : 'green';
         return color;
       });
+
+    // Lines
+    const lines = this.g.selectAll('.line')
+      .data(this.lines);
+
+    const linesEntered = lines.enter()
+      .append('line');
+
+    lines.merge(linesEntered)
+      .attr('class', 'line')
+      .attr('x1', d => this.xscale(d.a.x))
+      .attr('y1', d => this.yscale(d.a.y))
+      .attr('x2', d => this.xscale(d.b.x))
+      .attr('y2', d => this.yscale(d.b.y))
+      .attr('stroke-width', 1)
+      .attr('stroke', 'black');
 
     // Axis
     this.g.append('g')
@@ -62,6 +83,10 @@ class Plot {
       // .attr('class', 'axis axis--y')
       .attr('transform', 'translate(0, 0)')
       .call(d3.axisLeft(this.yscale));
+  }
+
+  addLine(a, b) {
+    this.lines.push({ a, b });
   }
 }
 
