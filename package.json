@@ -1,0 +1,9 @@
+{
+  "name": "perceptron-example",
+  "version": "0.0.0",
+  "description": "Javascript Implementation of a Perceptron Learning Algorithm for demonstration purposes",
+  "main": "index.js",
+  "repository": "https://github.com/abisz/perceptron-example",
+  "author": "Simon Reinsperger",
+  "license": "MIT"
+}
