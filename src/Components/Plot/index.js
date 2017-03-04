@@ -51,6 +51,17 @@ class Plot {
         const color = d.y > 0 ? 'red' : 'green';
         return color;
       });
+
+    // Axis
+    this.g.append('g')
+      // .attr('class', 'axis axis--x')
+      .attr('transform', `translate(0, ${this.height})`)
+      .call(d3.axisBottom(this.xscale));
+
+    this.g.append('g')
+      // .attr('class', 'axis axis--y')
+      .attr('transform', 'translate(0, 0)')
+      .call(d3.axisLeft(this.yscale));
   }
 }
 
