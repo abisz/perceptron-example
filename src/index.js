@@ -24,18 +24,28 @@ for (let i = 0; i < N; i += 1) {
   data.push(generateRandomPoint());
 }
 
+function hypothesis(point, weights) {
+  if (weights[0] + (point.x1 * weights[1]) + (point.x2 * weights[2]) > 0) {
+    return 1;
+  }
+  return -1;
+}
+
 const plot = new Plot('#plot');
+const weights = [Math.random(), Math.random(), Math.random()];
 
-const a = {
-  x: -1,
-  y: 0.2,
-};
+while (data.filter(d => hypothesis(d, weights) !== d.y).length > 0) {
+  const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);
 
-const b = {
-  x: 1,
-  y: 0.1,
-};
+  if (mismatches.length !== 0) {
+    const randomMismatch = mismatches[Math.floor(Math.random() * mismatches.length)];
 
-plot.addLine(a, b);
+    weights[0] += randomMismatch.y;
+    weights[1] += (randomMismatch.x1 * randomMismatch.y);
+    weights[2] += (randomMismatch.x2 * randomMismatch.y);
+  }
 
-plot.update(data);
+  plot.addLine(weights);
+  plot.update(data);
+}
+

@@ -85,7 +85,11 @@ class Plot {
       .call(d3.axisLeft(this.yscale));
   }
 
-  addLine(a, b) {
+  addLine(weights) {
+    const k = -(weights[1] / weights[2]);
+    const d = -(weights[0] / weights[2]);
+    const a = { x: -1, y: d - k };
+    const b = { x: 1, y: d + k };
     this.lines.push({ a, b });
   }
 }
