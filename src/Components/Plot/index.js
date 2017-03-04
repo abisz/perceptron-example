@@ -18,9 +18,25 @@ class Plot {
 
     this.g = this.svg.append('g')
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+
+    this.xscale = d3.scaleLinear()
+      .rangeRound([0, this.width]);
+
+    this.yscale = d3.scaleLinear()
+      .rangeRound([this.height, 0]);
   }
 
   update(data) {
+    this.xscale.domain([
+      data.map(d => d.x1).reduce((min, x) => Math.min(min, x)),
+      data.map(d => d.x1).reduce((max, x) => Math.max(max, x)),
+    ]);
+
+    this.yscale.domain([
+      data.map(d => d.x2).reduce((min, x) => Math.min(min, x)),
+      data.map(d => d.x2).reduce((max, x) => Math.max(max, x)),
+    ]);
+
     const points = this.g.selectAll('.point')
       .data(data);
 
@@ -28,8 +44,8 @@ class Plot {
       .append('circle');
 
     points.merge(pointsEntered)
-      .attr('cx', d => d.x1 * 10)
-      .attr('cy', d => d.x2 * 10)
+      .attr('cx', d => this.xscale(d.x1))
+      .attr('cy', d => this.yscale(d.x2))
       .attr('r', 5)
       .attr('fill', (d) => {
         const color = d.y > 0 ? 'red' : 'green';

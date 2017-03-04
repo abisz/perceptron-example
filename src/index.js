@@ -17,7 +17,7 @@ function generateRandomPoint(min = -1, max = 1) {
   };
 }
 
-const N = 10;
+const N = 100;
 const data = [];
 
 for (let i = 0; i < N; i += 1) {
