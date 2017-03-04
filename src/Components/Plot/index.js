@@ -21,18 +21,20 @@ class Plot {
   }
 
   update(data) {
-
     const points = this.g.selectAll('.point')
       .data(data);
 
     const pointsEntered = points.enter()
       .append('circle');
 
-    const pointsUpdate = points.merge(pointsEntered)
+    points.merge(pointsEntered)
       .attr('cx', d => d.x1 * 10)
       .attr('cy', d => d.x2 * 10)
       .attr('r', 5)
-      .attr('fill', d => d.y > 0 ? 'red' : 'green');
+      .attr('fill', (d) => {
+        const color = d.y > 0 ? 'red' : 'green';
+        return color;
+      });
   }
 }
 
