@@ -1,0 +1,22 @@
+.tick {
+    font: 10px sans-serif;
+}
+
+.track {
+    stroke-linecap: round;
+    stroke: #000;
+    stroke-opacity: 0.1;
+    stroke-width: 10px;
+}
+
+.track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+}
+
+.handle {
+    fill: white;
+    stroke: #000;
+    stroke-opacity: 0.5;
+    stroke-width: 1px;
+}

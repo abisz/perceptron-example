@@ -1,4 +1,5 @@
 import Plot from './Components/Plot';
+import Slider from './Components/Slider';
 
 // The target function as well as the point generator are only necessary for artificial scenarios
 // In a real world example you would already have the data set
@@ -35,9 +36,14 @@ function hypothesis(point, weights) {
   return -1;
 }
 
-const plot = new Plot('#plot');
 const weights = [Math.random(), Math.random(), Math.random()];
-const delay = 500;
+let delay = 500;
+
+const plot = new Plot('#plot');
+// eslint-disable-next-line no-unused-vars
+const slider = new Slider('#slider', 0, 1000, delay, (newValue) => {
+  delay = newValue;
+});
 
 function iterate() {
   const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);
