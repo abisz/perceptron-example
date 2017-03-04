@@ -1,17 +1,28 @@
 import Plot from './Components/Plot';
 
-const data = [
-  {
-    x1: 1,
-    x2: 2,
-    y: 1,
-  },
-  {
-    x1: 0.5,
-    x2: 0.5,
-    y: -1,
-  },
-];
+function targetFunction(point) {
+  if (point.x1 + point.x2 > 0.5) {
+    return 1;
+  }
+  return -1;
+}
+
+function generateRandomPoint(min = -1, max = 1) {
+  const x1 = (Math.random() * (Math.abs(min - max))) + min;
+  const x2 = (Math.random() * (Math.abs(min - max))) + min;
+  return {
+    x1,
+    x2,
+    y: targetFunction({ x1, x2 }),
+  };
+}
+
+const N = 10;
+const data = [];
+
+for (let i = 0; i < N; i += 1) {
+  data.push(generateRandomPoint());
+}
 
 const plot = new Plot('#plot');
 
