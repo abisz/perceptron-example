@@ -571,6 +571,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+bootstrap@^3.3.7:
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
+
 brace-expansion@^1.0.0:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.6.tgz#7197d7eaa9b87e648390ea61fc66c84427420df9"
@@ -775,6 +779,12 @@ co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
 
+coa@0.3.x:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/coa/-/coa-0.3.9.tgz#7e3d20d30af70b80862e95d4d49b715183be9604"
+  dependencies:
+    q "~0.8.10"
+
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -908,6 +918,12 @@ crypto-browserify@^3.0.0:
     pbkdf2 "^3.0.3"
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
+
+cssp@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/cssp/-/cssp-1.0.6.tgz#5ac64fba22a90a12347e46e035982182c1bf1b01"
+  dependencies:
+    ometajs "~ 3.1.x"
 
 d3-array@1, d3-array@1.1.0:
   version "1.1.0"
@@ -1979,6 +1995,15 @@ normalize-path@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-2.0.1.tgz#47886ac1662760d4261b7d979d241709d3ce3f7a"
 
+npm-css@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/npm-css/-/npm-css-0.2.3.tgz#fe965e28266125eb7c278adc3588bc9fb0bf2a77"
+  dependencies:
+    cssp "1.0.6"
+    optimist "0.3.5"
+    resolve "0.5.1"
+    traverse "0.6.6"
+
 npm-run-all@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-all/-/npm-run-all-4.0.2.tgz#a84669348e6db6ccbe052200b4cdb6bfe034a4fe"
@@ -2023,6 +2048,14 @@ object.omit@^2.0.0:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
 
+"ometajs@~ 3.1.x":
+  version "3.1.19"
+  resolved "https://registry.yarnpkg.com/ometajs/-/ometajs-3.1.19.tgz#2e55d098c61ceccd29fda15ef3d36892daeb6c99"
+  dependencies:
+    coa "0.3.x"
+    q "0.8.x"
+    uglify-js "1.3.x"
+
 once@^1.3.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
@@ -2048,6 +2081,12 @@ onchange@^3.2.1:
 opener@~1.4.0:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/opener/-/opener-1.4.3.tgz#5c6da2c5d7e5831e8ffa3964950f8d6674ac90b8"
+
+optimist@0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.3.5.tgz#03654b52417030312d109f39b159825b60309304"
+  dependencies:
+    wordwrap "~0.0.2"
 
 optimist@0.6.x:
   version "0.6.1"
@@ -2195,6 +2234,10 @@ punycode@1.3.2:
 punycode@^1.3.2, punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
+
+q@0.8.x, q@~0.8.10:
+  version "0.8.12"
+  resolved "https://registry.yarnpkg.com/q/-/q-0.8.12.tgz#9162a91e11819c4bcda7da15cf5fefaad0778823"
 
 qs@~2.3.3:
   version "2.3.3"
@@ -2374,6 +2417,10 @@ request@^2.79.0:
 requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+
+resolve@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-0.5.1.tgz#15e4a222c4236bcd4cf85454412c2d0fb6524576"
 
 resolve@1.1.7:
   version "1.1.7"
@@ -2645,6 +2692,10 @@ tough-cookie@~2.3.0:
   dependencies:
     punycode "^1.4.1"
 
+traverse@0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
+
 tree-kill@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/tree-kill/-/tree-kill-1.1.0.tgz#c963dcf03722892ec59cba569e940b71954d1729"
@@ -2668,6 +2719,10 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
 typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+uglify-js@1.3.x:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-1.3.5.tgz#4b5bfff9186effbaa888e4c9e94bd9fc4c94929d"
 
 uid-number@~0.0.6:
   version "0.0.6"

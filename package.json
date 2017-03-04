@@ -9,13 +9,18 @@
     "build": "npm run clean && npm-run-all build:*",
     "build:html": "cp ./src/*.html ./dist",
     "build:js": "browserify ./src/index.js -o dist/bundle.js -t [ babelify --presets es2015]",
+    "build:css": "npm-css ./src/index.css > ./dist/style.css",
     "clean": "rm -rf dist && mkdir dist",
-    "watch": "onchange 'src/**/*.js' -- npm run build",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:html": "onchange 'src/**/*.html' -- npm run build:html",
+    "watch:js": "onchange 'src/**/*.js' -- npm run build:js",
+    "watch:css": "onchange 'src/**/*.css' -- npm run build:css",
     "start": "npm run build && npm-run-all --parallel server watch",
     "server": "http-server dist"
   },
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "d3": "^4.7.1"
   },
   "devDependencies": {
@@ -23,6 +28,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "http-server": "^0.9.0",
+    "npm-css": "^0.2.3",
     "npm-run-all": "^4.0.2",
     "onchange": "^3.2.1"
   }
