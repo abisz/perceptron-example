@@ -1,32 +1,11 @@
 import Plot from './Components/Plot';
 import Slider from './Components/Slider';
+import Autoplay from './Components/Autoplay';
 
-// The target function as well as the point generator are only necessary for artificial scenarios
-// In a real world example you would already have the data set
-const targetValue = (Math.random() * 2) - 1;
-function targetFunction(point) {
-  if (point.x1 + point.x2 > targetValue) {
-    return 1;
-  }
-  return -1;
-}
-
-function generateRandomPoint(min = -1, max = 1) {
-  const x1 = (Math.random() * (Math.abs(min - max))) + min;
-  const x2 = (Math.random() * (Math.abs(min - max))) + min;
-  return {
-    x1,
-    x2,
-    y: targetFunction({ x1, x2 }),
-  };
-}
+import generateDataset from './data';
 
 const N = 100;
-const data = [];
-
-for (let i = 0; i < N; i += 1) {
-  data.push(generateRandomPoint());
-}
+const data = generateDataset(N);
 
 // Here is where the PLA starts
 function hypothesis(point, weights) {
@@ -38,12 +17,9 @@ function hypothesis(point, weights) {
 
 const weights = [Math.random(), Math.random(), Math.random()];
 let delay = 500;
+let playing = false;
 
 const plot = new Plot('#plot');
-// eslint-disable-next-line no-unused-vars
-const slider = new Slider('#slider', 0, 1000, delay, (newValue) => {
-  delay = newValue;
-});
 
 function iterate() {
   const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);
@@ -56,15 +32,25 @@ function iterate() {
     weights[2] += (randomMismatch.x2 * randomMismatch.y);
   }
 
-  plot.addLine(weights);
-  plot.update(data);
-
-  if (data.filter(d => hypothesis(d, weights) !== d.y).length > 0) {
-    setTimeout(iterate, delay);
-  } else {
+  if (data.filter(d => hypothesis(d, weights) !== d.y).length === 0) {
     plot.addLine(weights, true);
     plot.update(data);
+  } else if (playing) {
+    plot.addLine(weights);
+    plot.update(data);
+    setTimeout(iterate, delay);
   }
 }
 
+/* eslint-disable no-unused-vars */
+const sliderDelay = new Slider('#slider-delay', 0, 1000, delay, (newValue) => {
+  delay = newValue;
+});
+const autoplay = new Autoplay('#autoplay', { playing }, (state) => {
+  playing = state.playing;
+  if (playing) iterate();
+});
+/* eslint-enable no-unused-vars */
+
 iterate();
+plot.update(data);
