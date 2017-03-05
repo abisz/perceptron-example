@@ -26,6 +26,8 @@ class Plot {
       .rangeRound([this.height, 0]);
 
     this.lines = [];
+
+    this.initAxis();
   }
 
   update(data) {
@@ -102,13 +104,24 @@ class Plot {
     lines.exit().remove();
 
     // Axis
+    const xAxis = d3.axisBottom(this.xscale);
+    const yAxis = d3.axisLeft(this.yscale);
+
+    this.g.selectAll('.axis--x')
+      .call(xAxis);
+
+    this.g.selectAll('.axis--y')
+      .call(yAxis);
+  }
+
+  initAxis() {
     this.g.append('g')
-      // .attr('class', 'axis axis--x')
+      .attr('class', 'axis axis--x')
       .attr('transform', `translate(0, ${this.height})`)
       .call(d3.axisBottom(this.xscale));
 
     this.g.append('g')
-      // .attr('class', 'axis axis--y')
+      .attr('class', 'axis axis--y')
       .attr('transform', 'translate(0, 0)')
       .call(d3.axisLeft(this.yscale));
   }
