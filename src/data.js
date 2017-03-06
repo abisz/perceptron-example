@@ -2,7 +2,6 @@
 // In a real world example you would already have the data set
 const randomValue = (Math.random() * 2) - 1;
 function targetFunction(point, seed = randomValue) {
-  console.log(seed);
   if (point.x1 + point.x2 > seed) {
     return 1;
   }

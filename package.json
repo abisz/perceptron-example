@@ -12,13 +12,14 @@
     "build:css": "npm-css ./src/index.css > ./dist/style.css",
     "clean": "rm -rf dist && mkdir dist",
     "lint": "eslint --cache ./src/**/*.js",
-    "precommit": "npm run lint",
+    "precommit": "npm test",
     "watch": "npm-run-all --parallel watch:*",
     "watch:html": "onchange 'src/**/*.html' -- npm run build:html",
     "watch:js": "onchange 'src/**/*.js' -- npm run build:js",
     "watch:css": "onchange 'src/**/*.css' -- npm run build:css",
     "start": "npm run build && npm-run-all --parallel server watch",
-    "server": "http-server dist"
+    "server": "http-server dist",
+    "test": "tape -r babel-register test/**.*.js | faucet && npm run lint"
   },
   "license": "MIT",
   "dependencies": {
@@ -32,10 +33,12 @@
     "eslint": "^3.17.0",
     "eslint-config-airbnb-base": "^11.1.1",
     "eslint-plugin-import": "^2.2.0",
+    "faucet": "^0.0.1",
     "http-server": "^0.9.0",
     "husky": "^0.13.2",
     "npm-css": "^0.2.3",
     "npm-run-all": "^4.0.2",
-    "onchange": "^3.2.1"
+    "onchange": "^3.2.1",
+    "tape": "^4.6.3"
   }
 }
