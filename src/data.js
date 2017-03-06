@@ -1,8 +1,9 @@
 // The target function as well as the point generator are only necessary for artificial scenarios
 // In a real world example you would already have the data set
-const targetValue = (Math.random() * 2) - 1;
-function targetFunction(point) {
-  if (point.x1 + point.x2 > targetValue) {
+const randomValue = (Math.random() * 2) - 1;
+function targetFunction(point, seed = randomValue) {
+  console.log(seed);
+  if (point.x1 + point.x2 > seed) {
     return 1;
   }
   return -1;
