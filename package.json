@@ -36,6 +36,7 @@
     "faucet": "^0.0.1",
     "http-server": "^0.9.0",
     "husky": "^0.13.2",
+    "jsdom": "^9.11.0",
     "npm-css": "^0.2.3",
     "npm-run-all": "^4.0.2",
     "onchange": "^3.2.1",

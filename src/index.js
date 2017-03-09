@@ -42,6 +42,7 @@ function iterate() {
   }
 }
 
+// UI Components
 /* eslint-disable no-unused-vars */
 const sliderDelay = new Slider('#slider-delay', 0, 1000, delay, (newValue) => {
   delay = newValue;
@@ -52,5 +53,6 @@ const autoplay = new Autoplay('#autoplay', { playing }, (state) => {
 });
 /* eslint-enable no-unused-vars */
 
+// Start Learning Process
 iterate();
 plot.update(data);

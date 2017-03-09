@@ -1,15 +1,15 @@
 import * as d3 from 'd3';
 
 class Plot {
-  constructor(container) {
+  constructor(container, opts = {}) {
     this.margin = {
       top: 20,
       bottom: 80,
       left: 60,
       right: 60,
     };
-    this.width = 1000;
-    this.height = 600;
+    this.width = opts.width || 1000;
+    this.height = opts.height || 600;
 
     this.svg = d3.select(container)
       .append('svg')
@@ -107,20 +107,20 @@ class Plot {
     const xAxis = d3.axisBottom(this.xscale);
     const yAxis = d3.axisLeft(this.yscale);
 
-    this.g.selectAll('.axis--x')
+    this.xAxis.selectAll('.axis--x')
       .call(xAxis);
 
-    this.g.selectAll('.axis--y')
+    this.yAxis.selectAll('.axis--y')
       .call(yAxis);
   }
 
   initAxis() {
-    this.g.append('g')
+    this.xAxis = this.g.append('g')
       .attr('class', 'axis axis--x')
       .attr('transform', `translate(0, ${this.height})`)
       .call(d3.axisBottom(this.xscale));
 
-    this.g.append('g')
+    this.yAxis = this.g.append('g')
       .attr('class', 'axis axis--y')
       .attr('transform', 'translate(0, 0)')
       .call(d3.axisLeft(this.yscale));
