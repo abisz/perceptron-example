@@ -23,14 +23,14 @@ const plot = new Plot('#plot', {
   width: 800,
   height: 480,
   margin: {
-    top: 20,
+    top: 40,
     bottom: 20,
     left: 40,
     right: 20,
   },
 });
 
-function iterate() {
+function iterate(singleStep = false) {
   const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);
 
   if (mismatches.length !== 0) {
@@ -43,6 +43,9 @@ function iterate() {
 
   if (data.filter(d => hypothesis(d, weights) !== d.y).length === 0) {
     plot.addLine(weights, true);
+    plot.update(data);
+  } else if (singleStep) {
+    plot.addLine(weights);
     plot.update(data);
   } else if (playing) {
     plot.addLine(weights);
@@ -58,6 +61,7 @@ const sliderDelay = new Slider('#slider-delay', 0, 1000, delay, (newValue) => {
 });
 const autoplay = new Autoplay('#autoplay', { playing }, (state) => {
   playing = state.playing;
+  if (state.next) iterate(true);
   if (playing) iterate();
 });
 /* eslint-enable no-unused-vars */

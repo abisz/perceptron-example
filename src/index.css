@@ -1,3 +1,13 @@
 @import 'bootstrap';
 
 @import './Components/Slider/style.css';
+
+#plot,
+#autoplay,
+#slider-delay {
+  text-align: center;
+}
+
+#autoplay {
+  margin-top: 20px;
+}

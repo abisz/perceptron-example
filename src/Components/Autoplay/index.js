@@ -13,6 +13,14 @@ class Autoplay {
         this.stateChange();
       });
 
+    this.nextButton = this.container.append('button')
+      .attr('class', 'button button-next')
+      .text('>')
+      .on('click', () => {
+        this.state.next = true;
+        this.stateChange();
+      });
+
     // State
     this.state = initState;
 
@@ -27,6 +35,8 @@ class Autoplay {
   stateChange() {
     this.cb(this.state);
     this.update(this.state);
+
+    this.state.next = false;
   }
 }
 
