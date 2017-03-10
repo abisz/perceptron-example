@@ -2,10 +2,10 @@ import Plot from './Components/Plot';
 import Slider from './Components/Slider';
 import Autoplay from './Components/Autoplay';
 
-import generateDataset from './data';
+import { generateDataset, resetRandomValue } from './data';
 
 const N = 100;
-const data = generateDataset(N);
+let data = generateDataset(N);
 
 // Here is where the PLA starts
 function hypothesis(point, weights) {
@@ -56,6 +56,7 @@ function iterate() {
     plot.update(data);
     setTimeout(iterate, delay);
   } else {
+    plot.addLine(weights);
     plot.update(data);
   }
 }
@@ -74,6 +75,14 @@ function manualIterate(mismatch) {
   return null;
 }
 
+function reload() {
+  resetRandomValue();
+  data = generateDataset(N);
+  plot.reset();
+  plot.update(data);
+  iterate();
+}
+
 // UI Components
 /* eslint-disable no-unused-vars */
 const sliderDelay = new Slider('#slider-delay', 0, 1000, delay, (newValue) => {
@@ -83,6 +92,7 @@ let mismatch;
 const autoplay = new Autoplay('#autoplay', { playing }, (state) => {
   playing = state.playing;
   if (state.next) mismatch = manualIterate(mismatch);
+  if (state.reload) reload();
   if (playing) iterate();
 });
 /* eslint-enable no-unused-vars */

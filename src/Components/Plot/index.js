@@ -144,6 +144,12 @@ class Plot {
   clearHighlight() {
     this.highlighted = null;
   }
+
+  reset() {
+    this.lines = [];
+    this.highlighted = null;
+    this.finalLine = null;
+  }
 }
 
 export default Plot;

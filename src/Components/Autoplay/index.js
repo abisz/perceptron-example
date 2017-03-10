@@ -6,6 +6,14 @@ class Autoplay {
 
     this.container = d3.select(container);
 
+    this.resetButton = this.container.append('button')
+      .attr('class', 'button button-reset')
+      .text('↺')
+      .on('click', () => {
+        this.state.reload = true;
+        this.stateChange();
+      });
+
     this.playButton = this.container.append('button')
       .attr('class', 'button button-play')
       .on('click', () => {
@@ -37,6 +45,7 @@ class Autoplay {
     this.update(this.state);
 
     this.state.next = false;
+    this.state.reload = false;
   }
 }
 

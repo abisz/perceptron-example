@@ -1,6 +1,7 @@
-@import 'bootstrap';
+/*@import 'bootstrap';*/
 
 @import './Components/Slider/style.css';
+@import './Components/Autoplay/style.css';
 
 #plot,
 #autoplay,

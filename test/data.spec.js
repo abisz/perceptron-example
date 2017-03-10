@@ -1,6 +1,6 @@
 const test = require('tape');
 
-import generateDataset from '../src/data.js';
+import { generateDataset } from '../src/data.js';
 
 test('data.js - generateDataset', (assert) => {
   const N = 10;
