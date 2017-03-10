@@ -19,7 +19,16 @@ const weights = [Math.random(), Math.random(), Math.random()];
 let delay = 500;
 let playing = false;
 
-const plot = new Plot('#plot');
+const plot = new Plot('#plot', {
+  width: 800,
+  height: 480,
+  margin: {
+    top: 20,
+    bottom: 20,
+    left: 40,
+    right: 20,
+  },
+});
 
 function iterate() {
   const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);

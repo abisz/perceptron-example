@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 
 class Plot {
   constructor(container, opts = {}) {
-    this.margin = {
+    this.margin = opts.margin || {
       top: 20,
       bottom: 80,
       left: 60,
