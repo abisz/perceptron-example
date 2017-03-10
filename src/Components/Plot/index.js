@@ -59,6 +59,8 @@ class Plot {
       .attr('class', 'point')
       .attr('cx', d => this.xscale(d.x1))
       .attr('cy', d => this.yscale(d.x2))
+      .attr('stroke-width', d => (this.highlighted === d ? 3 : 0))
+      .attr('stroke', 'yellow')
       .attr('r', 5)
       .attr('fill', (d) => {
         const color = d.y > 0 ? 'red' : 'blue';
@@ -133,6 +135,14 @@ class Plot {
     const b = { x: 1, y: d + k };
     if (final) this.finalLine = { a, b };
     else this.lines.push({ a, b });
+  }
+
+  highlightPoint(point) {
+    this.highlighted = point;
+  }
+
+  clearHighlight() {
+    this.highlighted = null;
   }
 }
 

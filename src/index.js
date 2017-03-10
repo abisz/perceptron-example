@@ -15,7 +15,15 @@ function hypothesis(point, weights) {
   return -1;
 }
 
-const weights = [Math.random(), Math.random(), Math.random()];
+function adjustWeights(weights, mismatch) {
+  return [
+    weights[0] + mismatch.y,
+    weights[1] + (mismatch.x1 * mismatch.y),
+    weights[2] + (mismatch.x2 * mismatch.y),
+  ];
+}
+
+let weights = [Math.random(), Math.random(), Math.random()];
 let delay = 500;
 let playing = false;
 
@@ -30,28 +38,40 @@ const plot = new Plot('#plot', {
   },
 });
 
-function iterate(singleStep = false) {
+function iterate() {
   const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);
 
   if (mismatches.length !== 0) {
     const randomMismatch = mismatches[Math.floor(Math.random() * mismatches.length)];
-
-    weights[0] += randomMismatch.y;
-    weights[1] += (randomMismatch.x1 * randomMismatch.y);
-    weights[2] += (randomMismatch.x2 * randomMismatch.y);
+    weights = adjustWeights(weights, randomMismatch);
   }
+
+  plot.clearHighlight();
 
   if (data.filter(d => hypothesis(d, weights) !== d.y).length === 0) {
     plot.addLine(weights, true);
-    plot.update(data);
-  } else if (singleStep) {
-    plot.addLine(weights);
     plot.update(data);
   } else if (playing) {
     plot.addLine(weights);
     plot.update(data);
     setTimeout(iterate, delay);
+  } else {
+    plot.update(data);
   }
+}
+
+function manualIterate(mismatch) {
+  const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);
+  if (!mismatch) {
+    const randomMismatch = mismatches[Math.floor(Math.random() * mismatches.length)];
+    plot.highlightPoint(randomMismatch);
+    plot.update(data);
+    return randomMismatch;
+  }
+  weights = adjustWeights(weights, mismatch);
+  plot.addLine(weights);
+  plot.update(data);
+  return null;
 }
 
 // UI Components
@@ -59,13 +79,13 @@ function iterate(singleStep = false) {
 const sliderDelay = new Slider('#slider-delay', 0, 1000, delay, (newValue) => {
   delay = newValue;
 });
+let mismatch;
 const autoplay = new Autoplay('#autoplay', { playing }, (state) => {
   playing = state.playing;
-  if (state.next) iterate(true);
+  if (state.next) mismatch = manualIterate(mismatch);
   if (playing) iterate();
 });
 /* eslint-enable no-unused-vars */
 
 // Start Learning Process
 iterate();
-plot.update(data);
