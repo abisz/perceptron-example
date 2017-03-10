@@ -85,9 +85,17 @@ function reload() {
 
 // UI Components
 /* eslint-disable no-unused-vars */
-const sliderDelay = new Slider('#slider-delay', 0, 1000, delay, (newValue) => {
+const sliderDelay = new Slider('#slider-delay', {
+  min: 0,
+  max: 1000,
+  init: delay,
+  width: 600,
+  height: 60,
+  unit: 'ms',
+}, (newValue) => {
   delay = newValue;
 });
+
 let mismatch;
 const autoplay = new Autoplay('#autoplay', { playing }, (state) => {
   playing = state.playing;
