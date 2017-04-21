@@ -1,0 +1,40 @@
+/*@import 'bootstrap';*/
+
+.tick {
+    font: 10px sans-serif;
+}
+
+.track {
+    stroke-linecap: round;
+    stroke: #000;
+    stroke-opacity: 0.1;
+    stroke-width: 10px;
+}
+
+.track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+}
+
+.handle {
+    fill: white;
+    stroke: #000;
+    stroke-opacity: 0.5;
+    stroke-width: 1px;
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+}
+
+
+#plot,
+#autoplay,
+#slider-delay {
+  text-align: center;
+}
+
+#autoplay {
+  margin-top: 20px;
+}
