@@ -3,14 +3,23 @@
 @import './Components/Slider/style.css';
 @import './Components/Autoplay/style.css';
 
-#plot,
 #autoplay,
 #slider-delay {
   text-align: center;
 }
 
+#plot {
+  width: calc(100% - 250px);
+  margin-left: 250px;
+}
+
 #autoplay {
   margin-top: 20px;
+}
+
+#settings {
+  float: left;
+  width: 250px;
 }
 
 h1 {

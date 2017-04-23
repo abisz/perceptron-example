@@ -1,6 +1,7 @@
 import Plot from './Components/Plot';
 import Slider from './Components/Slider';
 import Autoplay from './Components/Autoplay';
+import Settings from './Components/Settings';
 
 import { generateDataset, resetRandomValue } from './data';
 
@@ -103,6 +104,8 @@ const autoplay = new Autoplay('#autoplay', { playing }, (state) => {
   if (state.reload) reload();
   if (playing) iterate();
 });
+
+const settings = new Settings('#settings');
 /* eslint-enable no-unused-vars */
 
 // Start Learning Process
