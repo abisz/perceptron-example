@@ -39,7 +39,11 @@ const plot = new Plot('#plot', {
   },
 });
 
-function iterate() {
+let isIterating = false;
+function iterate(recursiveCall = false) {
+  if (isIterating && !recursiveCall) return;
+  isIterating = true;
+
   const mismatches = data.filter(d => hypothesis(d, weights) !== d.y);
 
   if (mismatches.length !== 0) {
@@ -52,13 +56,17 @@ function iterate() {
   if (data.filter(d => hypothesis(d, weights) !== d.y).length === 0) {
     plot.addLine(weights, true);
     plot.update(data);
+    isIterating = false;
   } else if (playing) {
     plot.addLine(weights);
     plot.update(data);
-    setTimeout(iterate, delay);
+    setTimeout(() => {
+      iterate(true);
+    }, delay);
   } else {
     plot.addLine(weights);
     plot.update(data);
+    isIterating = false;
   }
 }
 
