@@ -2,7 +2,9 @@
 
 @import './Components/Slider/style.css';
 @import './Components/Autoplay/style.css';
+@import './Components/Settings/style.css';
 
+/* Layout */
 #autoplay,
 #slider-delay {
   text-align: center;
@@ -22,7 +24,11 @@
   width: 250px;
 }
 
+/* Typo */
+body {
+  font-family: sans-serif;
+}
+
 h1 {
   text-align: center;
-  font-family: sans-serif;
 }

@@ -5,7 +5,7 @@ import Settings from './Components/Settings';
 
 import { generateDataset, resetRandomValue } from './data';
 
-const N = 100;
+let N = 100;
 let data = generateDataset(N);
 
 // Here is where the PLA starts
@@ -105,7 +105,9 @@ const autoplay = new Autoplay('#autoplay', { playing }, (state) => {
   if (playing) iterate();
 });
 
-const settings = new Settings('#settings');
+const settings = new Settings('#settings', N, (newN) => {
+  N = newN;
+});
 /* eslint-enable no-unused-vars */
 
 // Start Learning Process
