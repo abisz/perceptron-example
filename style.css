@@ -28,18 +28,46 @@
   height: 30px;
 }
 
+.settings-container {
+  padding: 0.5em;
+}
 
-#plot,
+.input input {
+  width: 50px;
+  margin-left: 10px;
+}
+
+.input label {
+  font-size: 0.8em;
+  font-weight: 100;
+  margin: 0 0 0.5em;
+}
+
+/* Layout */
 #autoplay,
 #slider-delay {
   text-align: center;
+}
+
+#plot {
+  width: calc(100% - 250px);
+  margin-left: 250px;
 }
 
 #autoplay {
   margin-top: 20px;
 }
 
+#settings {
+  float: left;
+  width: 250px;
+}
+
+/* Typo */
+body {
+  font-family: sans-serif;
+}
+
 h1 {
   text-align: center;
-  font-family: sans-serif;
 }

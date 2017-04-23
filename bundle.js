@@ -16815,6 +16815,42 @@ var d3 = _interopRequireWildcard(_d);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Settings = function Settings(container, init, onchange) {
+  _classCallCheck(this, Settings);
+
+  this.container = d3.select(container).attr('class', 'settings-container');
+
+  this.container.append('h3').text('Settings');
+
+  // nInput
+  this.nInput = this.container.append('div').attr('class', 'input');
+
+  // nInput Label
+  this.nInput.append('label').attr('for', 'input-n').text('Number of data points:');
+
+  // nInput
+  this.nInput.append('input').attr('id', 'input-n').attr('type', 'number').attr('value', init).on('change', function () {
+    return onchange(d3.event.target.valueAsNumber);
+  });
+};
+
+exports.default = Settings;
+
+},{"d3":1}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _d = require('d3');
+
+var d3 = _interopRequireWildcard(_d);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /* Inspired by https://bl.ocks.org/mbostock/6452972 */
 
 var Slider = function Slider(container, opts, onchange) {
@@ -16858,7 +16894,7 @@ var Slider = function Slider(container, opts, onchange) {
 
 exports.default = Slider;
 
-},{"d3":1}],5:[function(require,module,exports){
+},{"d3":1}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16905,7 +16941,7 @@ function generateDataset(N) {
   return data;
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var _Plot = require('./Components/Plot');
@@ -16919,6 +16955,10 @@ var _Slider2 = _interopRequireDefault(_Slider);
 var _Autoplay = require('./Components/Autoplay');
 
 var _Autoplay2 = _interopRequireDefault(_Autoplay);
+
+var _Settings = require('./Components/Settings');
+
+var _Settings2 = _interopRequireDefault(_Settings);
 
 var _data = require('./data');
 
@@ -16954,7 +16994,13 @@ var plot = new _Plot2.default('#plot', {
   }
 });
 
+var isIterating = false;
 function iterate() {
+  var recursiveCall = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+  if (isIterating && !recursiveCall) return;
+  isIterating = true;
+
   var mismatches = data.filter(function (d) {
     return hypothesis(d, weights) !== d.y;
   });
@@ -16971,13 +17017,17 @@ function iterate() {
   }).length === 0) {
     plot.addLine(weights, true);
     plot.update(data);
+    isIterating = false;
   } else if (playing) {
     plot.addLine(weights);
     plot.update(data);
-    setTimeout(iterate, delay);
+    setTimeout(function () {
+      iterate(true);
+    }, delay);
   } else {
     plot.addLine(weights);
     plot.update(data);
+    isIterating = false;
   }
 }
 
@@ -17025,9 +17075,13 @@ var autoplay = new _Autoplay2.default('#autoplay', { playing: playing }, functio
   if (state.reload) reload();
   if (playing) iterate();
 });
+
+var settings = new _Settings2.default('#settings', N, function (newN) {
+  N = newN;
+});
 /* eslint-enable no-unused-vars */
 
 // Start Learning Process
 iterate();
 
-},{"./Components/Autoplay":2,"./Components/Plot":3,"./Components/Slider":4,"./data":5}]},{},[6]);
+},{"./Components/Autoplay":2,"./Components/Plot":3,"./Components/Settings":4,"./Components/Slider":5,"./data":6}]},{},[7]);
